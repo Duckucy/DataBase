@@ -2,54 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management</title>
+    <title>Employee, Customer, Transaction Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h2>Add New Employee</h2>
-    <form action="/" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
+<div class="container">
+    <h1>Employee, Customer, Transaction Management</h1>
 
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required><br><br>
-
-        <label for="country">Country:</label>
-        <input type="text" id="country" name="country"><br><br>
-
-        <label for="position">Position:</label>
-        <input type="text" id="position" name="position"><br><br>
-
-        <label for="wage">Wage:</label>
-        <input type="number" step="0.01" id="wage" name="wage" required><br><br>
-
-        <input type="submit" value="Add Employee">
+    <h2>Employees</h2>
+    <form action="{{ url_for('employees_bp.add_employee') }}" method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="number" name="age" placeholder="Age" required>
+        <input type="text" name="country" placeholder="Country" required>
+        <input type="text" name="position" placeholder="Position" required>
+        <input type="number" name="wage" placeholder="Wage" required>
+        <button type="submit" class="btn btn-primary">Add Employee</button>
     </form>
-
-    <h2>Employee List</h2>
-    <table border="1">
+    
+    <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Country</th>
-                <th>Position</th>
-                <th>Wage</th>
+                <th>ID</th><th>Name</th><th>Age</th><th>Country</th><th>Position</th><th>Wage</th><th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for employee in employees %}
             <tr>
-                <td>{{ employee[0] }}</td>
-                <td>{{ employee[1] }}</td>
-                <td>{{ employee[2] }}</td>
-                <td>{{ employee[3] }}</td>
-                <td>{{ employee[4] }}</td>
-                <td>{{ employee[5] }}</td>
+                <td>{{ employee.id }}</td>
+                <form action="{{ url_for('employees_bp.update_employee', employee_id=employee.id) }}" method="POST">
+                    <td><input type="text" name="name" value="{{ employee.name }}" required></td>
+                    <td><input type="number" name="age" value="{{ employee.age }}" required></td>
+                    <td><input type="text" name="country" value="{{ employee.country }}" required></td>
+                    <td><input type="text" name="position" value="{{ employee.position }}" required></td>
+                    <td><input type="number" name="wage" value="{{ employee.wage }}" required></td>
+                    <td>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </td>
+                </form>
+                <td>
+                    <form action="{{ url_for('employees_bp.delete_employee', employee_id=employee.id) }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+
+    <h2>Customers</h2>
+    <form action="{{ url_for('customers_bp.add_customer') }}" method="POST">
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <button type="submit" class="btn btn-primary">Add Customer</button>
+    </form>
+
+    <h2>Transactions</h2>
+    <form action="{{ url_for('transactions_bp.add_transaction') }}" method="POST">
+        <input type="number" name="amount" placeholder="Amount" required>
+        <input type="number" name="customer_id" placeholder="Customer ID" required>
+        <button type="submit" class="btn btn-primary">Add Transaction</button>
+    </form>
+
+    <h2>Customer Transactions</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Transaction ID</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trans in transactions %}
+                <tr>
+                    <td>{{ trans.customer_id }}</td>
+                    <td>{{ trans.first_name }}</td>
+                    <td>{{ trans.last_name }}</td>
+                    <td>{{ trans.transaction_id }}</td>
+                    <td>{{ trans.amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
