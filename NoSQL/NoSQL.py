@@ -47,14 +47,5 @@ def show_all():
     session['show_all'] = not session.get('show_all', False)
     return redirect(url_for('index'))
 
-# Delete a document (Delete)
-@app.route('/delete/<id>', methods=['POST'])
-def delete(id):
-    try:
-        collection.delete_one({"_id": ObjectId(id)})
-        return redirect(url_for('index'))
-    except Exception as e:
-        return str(e), 400
-
 if __name__ == '__main__':
     app.run(debug=True)
