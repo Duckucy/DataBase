@@ -6,6 +6,6 @@
 <p>Design an ER model for three entities: employees, custormers and Transaction. And JOIN two of them.</p>
 <a href="https://youtu.be/Tvzywr-OGvc">Video</a>
 <h2>HW3</h2>
-<p>Create a database with MangoDB, and show the data on pages.</p>
+<p>Create a database with MongoDB, and show the data on pages.</p>
 <a href="https://youtu.be/w3DOX74ogGA">Video</a>
 <h1>Final Project</h1>
