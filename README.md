@@ -8,4 +8,7 @@
 <h2>HW3</h2>
 <p>Create a database with MongoDB, and show the data on pages.</p>
 <a href="https://youtu.be/w3DOX74ogGA">Video</a>
+<h2>HW4</h2>
+<p>Delete the data from the page, and show in the MongoDB.</p>
+<a href="https://youtu.be/DBaoKwol-bg">Video</a>
 <h1>Final Project</h1>
