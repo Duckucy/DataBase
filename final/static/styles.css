@@ -1,0 +1,106 @@
+/* 通用樣式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: #007bff;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+main {
+    padding: 2rem;
+}
+
+/* 表單樣式 */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form input,
+form button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form input:focus,
+form button:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+form button {
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form button:hover {
+    background: #0056b3;
+}
+
+/* 清單樣式 */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background: #fff;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul li:hover {
+    background: #f1f1f1;
+}
+
+/* 導航樣式 */
+nav {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    margin: 0 1rem;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #0056b3;
+}
+
+/* 空數據樣式 */
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+}
