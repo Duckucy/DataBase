@@ -1,20 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Analysis</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Game Behavior Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .actions button {
+            width: auto;
+            display: inline-block;
+            margin: 0 5px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Game Analysis System</h1>
+        <h1>Game Behavior Analyzer</h1>
     </header>
-    <main>
-        <nav>
-            <a href="/register">Register a Player</a>
-            <a href="/game_sessions">View Game Sessions</a>
-        </nav>
-    </main>
+    <div class="container">
+        <form id="createPlayerForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Create Player</button>
+        </form>
+
+        <h2>Player List</h2>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+            {% for player in players %}
+            <tr>
+                <td>{{ player[1] }}</td>
+                <td>{{ player[2] }}</td>
+                <td>{{ player[3] }}</td>
+                <td class="actions">
+                    <button type="button" onclick="updatePlayer({{ player[0] }})">Update</button>
+                    <button type="button" onclick="deletePlayer({{ player[0] }})">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Player Game Records</h2>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Score</th>
+                <th>Play Time</th>
+                <th>Level Reached</th>
+                <th>Session Date</th>
+            </tr>
+            {% for session in game_sessions %}
+            <tr>
+                <td>{{ session[0] }}</td>
+                <td>{{ session[1] }}</td>
+                <td>{{ session[2] }}</td>
+                <td>{{ session[3] }}</td>
+                <td>{{ session[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('createPlayerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+            };
+            
+            fetch('/create_player', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                console.log(data);
+                location.reload();
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        function updatePlayer(playerId) {
+            const username = prompt("Enter new username:");
+            const email = prompt("Enter new email:");
+            const password = prompt("Enter new password:");
+            const formData = { username, email, password };
+
+            fetch(`/update_player/${playerId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                console.log(data);
+                location.reload();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function deletePlayer(playerId) {
+            if (confirm("Are you sure you want to delete this player?")) {
+                fetch(`/delete_player/${playerId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    console.log(data);
+                    location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,106 +1,167 @@
-/* 通用樣式 */
+/* 全局樣式 */
+
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
     color: #333;
-    line-height: 1.6;
 }
 
 header {
-    background: #007bff;
-    color: white;
-    padding: 1rem 0;
+    background-color: #2c3e50; /* 深色背景 */
+    color: #ecf0f1; /* 淺色文字 */
+    padding: 20px 0;
     text-align: center;
 }
 
 header h1 {
     margin: 0;
-    font-size: 2rem;
-}
-
-main {
-    padding: 2rem;
-}
-
-/* 表單樣式 */
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-form input,
-form button {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-form input:focus,
-form button:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-form button {
-    background: #007bff;
-    color: white;
-    cursor: pointer;
+    font-size: 2.5rem; /* 更大標題字體 */
     font-weight: bold;
+    color: #000000; /* 顯示在深色背景上的白色 */
 }
 
-form button:hover {
-    background: #0056b3;
-}
-
-/* 清單樣式 */
-ul {
-    list-style-type: none;
+header nav ul {
+    list-style: none;
     padding: 0;
+    margin: 10px 0 0; /* 增加導航距離 */
 }
 
-ul li {
-    background: #fff;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
 }
 
-ul li:hover {
-    background: #f1f1f1;
-}
-
-/* 導航樣式 */
-nav {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-nav a {
+header nav ul li a {
+    color: #436277; /* 更亮的灰色文字，對比清晰 */
     text-decoration: none;
-    color: #007bff;
     font-weight: bold;
-    margin: 0 1rem;
-    transition: color 0.3s;
+    font-size: 1.1rem;
 }
 
-nav a:hover {
-    color: #0056b3;
+header nav ul li a:hover {
+    color: #ecf0f1; /* 滑鼠懸停變成白色 */
 }
 
-/* 空數據樣式 */
-p {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #888;
+/* 主內容容器 */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff; /* 白色背景 */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 表格樣式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #34495e;
+    color: #fff;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* 偶數行淡灰色背景 */
+}
+
+/* 按鈕樣式 */
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add {
+    background-color: #27ae60;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.btn-add:hover {
+    background-color: #1e8449;
+}
+
+.btn-edit {
+    background-color: #f39c12;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: #d68910;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* 彈出視窗樣式 */
+#session-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+#session-modal form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#session-modal form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#session-modal button {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+#cancel-btn {
+    background-color: #95a5a6;
+    color: #fff;
+}
+
+#cancel-btn:hover {
+    background-color: #7f8c8d;
+}
+
+/* 覆蓋層樣式 */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
