@@ -18,9 +18,10 @@ def index():
     players = cursor.fetchall()
     
     join_query = """
-        SELECT p.username, gs.score, gs.play_time, gs.level_reached, gs.session_date 
+        SELECT p.username, gs.score, gs.play_time, gs.level_reached, gs.session_date, g.game_name, g.game_type 
         FROM players p
         JOIN game_sessions gs ON p.player_id = gs.player_id
+        JOIN games g ON gs.game_id = g.game_id
     """
     cursor.execute(join_query)
     game_sessions = cursor.fetchall()
