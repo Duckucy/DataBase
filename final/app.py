@@ -49,8 +49,15 @@ def update_player(player_id):
 @app.route('/delete_player/<int:player_id>', methods=['DELETE'])
 def delete_player(player_id):
     cursor = db.cursor()
+
+    # 先刪除相關的 game_sessions 條目
+    cursor.execute("DELETE FROM game_sessions WHERE player_id=%s", (player_id,))
+    db.commit()
+
+    # 然後刪除 players 條目
     cursor.execute("DELETE FROM players WHERE player_id=%s", (player_id,))
     db.commit()
+    
     return jsonify({'message': 'Player deleted successfully'})
 
 if __name__ == '__main__':
